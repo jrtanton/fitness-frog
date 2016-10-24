@@ -41,14 +41,19 @@ namespace Treehouse.FitnessFrog.Controllers
 
         public ActionResult Add()
         {
-            return View();
+            var entry = new Entry()
+            {
+                Date = DateTime.Today
+            };
+
+
+            return View(entry);
         }
 
         [HttpPost]
-        public ActionResult Add(DateTime? date, int? activityId, double? duration, Entry.IntensityLevel? intensity, 
-            bool? exclude, string notes)
+        public ActionResult Add(Entry entry)
         {
-           
+
             //Using HTML helper methods in views reduce the need to use the ViewBag
             //ViewBag.Date = ModelState["Date"].Value.AttemptedValue;
             //ViewBag.activityId = ModelState["ActivityId"].Value.AttemptedValue;
@@ -57,7 +62,13 @@ namespace Treehouse.FitnessFrog.Controllers
             //ViewBag.Exclude = ModelState["Exclude"].Value.AttemptedValue;
             //ViewBag.Notes = ModelState["Notes"].Value.AttemptedValue;
 
-            return View();
+            if (ModelState.IsValid)
+            {
+                _entriesRepository.AddEntry(entry);
+                
+            }
+
+            return View(entry);
         }
 
 
