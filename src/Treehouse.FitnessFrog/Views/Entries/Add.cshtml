@@ -7,9 +7,8 @@
 
 <h2>@ViewBag.Title</h2>
 
-<div class="alert alert-danger">
-    
-</div>
+@Html.ValidationSummary("The following errors were found:", new { @class = "alert alert-danger" })
+
 
 @using (Html.BeginForm())
 {
